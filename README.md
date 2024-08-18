@@ -109,7 +109,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## Warning !
 
-If you try to run env_render_test.py file it can be render diffent test for first time. If you quite the rendering it will render according to current test variables.
+If you try to run env_render_test.py file it can be render diffent test for first time. If you quite the rendering with press "q" it will re-render according to current test variables.
 
 ## Contributing
 
