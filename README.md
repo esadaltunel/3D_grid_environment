@@ -107,6 +107,10 @@ The `sensor` method allows the agent to detect obstacles in its immediate vicini
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
+## Warning !
+
+If you try to run env_render_test.py file it can be render diffent test for first time. If you quite the rendering it will render according to current test variables.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue.
