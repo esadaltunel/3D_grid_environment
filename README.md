@@ -113,7 +113,7 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ## Contact
 
-For any inquiries or issues, please contact [Your Name] at [your-email@example.com].
+For any inquiries or issues, please contact "Omer Esad Altunel" at "omeresadaltunel@gmail.com".
 
 ---
 
