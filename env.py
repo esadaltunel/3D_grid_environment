@@ -116,10 +116,8 @@ class Env(gym.Env):
     
     def reward(self):
         reward = -1
-        if self.agent_position[0] == self.end_point[0]:
-            if self.agent_position[1] == self.end_point[1]:
-               if self.agent_position[2] == self.end_point[2]:
-                    reward = 0
+        if np.array_equal(self.start_point, self.end_point):
+            reward = 0
         self.rewards.append(reward)
         return reward
     
@@ -133,8 +131,9 @@ class Env(gym.Env):
             if temp_pos not in self.detected_obstacles:
                 self.agent_position = temp_pos
                 
-        if self.agent_position.all() == self.end_point.all():
+        if np.array_equal(self.start_point, self.end_point):
             self.terminated = True
+                    
         elif self.t_step == self.max_step:
             self.truncated = True
         self.transactions.append(self.agent_position)
@@ -154,10 +153,8 @@ class Env(gym.Env):
             neighbor = [self.agent_position[i] + delta[i] for i in range(3)]
             neighbors.append(neighbor)
 
-        neighbors = [n for n in neighbors if n != self.agent_position]
-        self.detected_obstacles = []
         for i in range(len(neighbors)):
-            if neighbors[i] in self.obstacles:
+            if any(np.array_equal(neighbors[i], obstacle) for obstacle in self.obstacles):
                 self.detected_obstacles.append(neighbors[i])
                 
     def _render_frame(self):
