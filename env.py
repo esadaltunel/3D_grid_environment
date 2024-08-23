@@ -25,6 +25,17 @@ class Env(gym.Env):
         self.num_obstacles = num_obstacles
         self.observation_space = spaces.MultiDiscrete([20] * 18)
         self.action_space = spaces.MultiBinary(3)
+        self._action_to_direction = {
+            0:np.array([0, 0, 0]),
+            1:np.array([0, 0, 1]),
+            2:np.array([0, 1, 0]),
+            3:np.array([0, 1, 1]),
+            4:np.array([1, 0, 0]),
+            5:np.array([1, 0, 1]),
+            6:np.array([1, 1, 0]),
+            7:np.array([1, 1, 1])
+        }
+        
         self.actions = {0: -1, # if zero go left/down/back 
                         1: +1} # if one any axis go front/up/right
         self.seed = 42
@@ -122,6 +133,7 @@ class Env(gym.Env):
         return reward
     
     def step(self, action):
+        action = self._action_to_direction[int(action)]
         self.t_step += 1
         temp_pos = [self.agent_position[0] + self.actions[action[0]],
                     self.agent_position[1] + self.actions[action[1]],
