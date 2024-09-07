@@ -153,9 +153,8 @@ class Env(gym.Env):
                 
     def _render_frame(self):
         # Create a 3D plot
-        fig = plt.figure()
+        fig = plt.figure(figsize=(12, 8))
         ax = fig.add_subplot(111, projection='3d')
-
         # Plot the start point
         ax.scatter(self.start_point[0], self.start_point[1], self.start_point[2], color='green', s=100, label='Start')
 
@@ -167,11 +166,11 @@ class Env(gym.Env):
 
         # Plot the transactions
         for t in self.transactions:
-                # Draw a line between the start and end points of each transaction
+            # Draw a line between the start and end points of each transaction
             ax.plot([t[0], t[3]], [t[1], t[4]], [t[2], t[5]], color='orange')
-                # Plot the end point of each transaction
+            # Plot the end point of each transaction
             ax.scatter(t[3], t[4], t[5], color='orange', s=50)
-            
+
         # Set labels and title
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
@@ -181,7 +180,10 @@ class Env(gym.Env):
         # Add a legend
         ax.legend()
 
+        # Add text outside the 3D plot
+        plt.figtext(0.15, 0.95, f'Start Point: {self.start_point}', fontsize=12, color='green', bbox=dict(facecolor='white', edgecolor='green', boxstyle='round,pad=0.5'))
+        plt.figtext(0.15, 0.90, f'End Point: {self.end_point}', fontsize=12, color='red', bbox=dict(facecolor='white', edgecolor='red', boxstyle='round,pad=0.5'))
+        plt.figtext(0.15, 0.85, f'Total Rewards: {sum(self.rewards)}', fontsize=12, color='black', bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'))
+
         # Show the plot
         plt.show()
-        time.sleep(5)
-        plt.close(fig)
