@@ -74,7 +74,7 @@ The `step` method processes an action, updating the agent's position and checkin
 
 ## Rasults 
 
-## For obstacles free evironment
+### For obstacles free evironment
 - Agent can learn the reachs end point with the minimal steps.
 - You can examine the training process from `episode_reward.png` and the reasult of the trainig process from `lsat_transaction.png`
 
