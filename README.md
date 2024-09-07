@@ -17,8 +17,8 @@ This project implements a custom 3D grid environment using `gymnasium`, designed
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/esadaltunel/3D_grid_environment
+   cd 3D_grid_environment
    ```
 
 2. Install the required Python packages:
