@@ -7,11 +7,9 @@ This project implements a custom 3D grid environment using `gymnasium`, designed
 ### Features
 
 - **3D Grid World**: The environment is represented as a 20x20x20 grid.
-- **Customizable Obstacles**: Up to 400 obstacles are randomly placed within the grid.
 - **Boundary Conditions**: The environment includes checks for boundaries to prevent the agent from moving out of bounds.
 - **Reward System**: A negative reward is given for each step, encouraging the agent to find the shortest path. A reward of zero is given when the agent reaches the end point.
-- **3D Rendering and Animation**: The environment provides 3D rendering and real-time animation of the agent's movements.
-- **Sensor Functionality**: The agent can detect obstacles in its immediate vicinity.
+- **3D Rendering**: The environment provides 3D rendering.
 
 ## Installation
 
@@ -35,7 +33,7 @@ This project implements a custom 3D grid environment using `gymnasium`, designed
 
 ### State Space
 
-The observation space is a `MultiDiscrete` space representing the agent's position, boundary conditions, and relative position to the end point. The observation vector contains 18 elements:
+The observation space is representing the agent's position, boundary conditions, and relative position to the end point. The observation vector contains 18 elements:
 - Start position (`x, y, z`)
 - Current agent position (`x, y, z`)
 - Boundary indicators (`up, down, left, right, front, back`)
@@ -60,7 +58,7 @@ An episode terminates when:
 
 ### Rendering
 
-The environment provides a 3D rendering of the agent's path, obstacles, start, and end points. The rendering is done using `matplotlib`'s 3D plotting capabilities. The agent's movements are animated, showing its progress through the grid.
+The environment provides a 3D rendering of the agent's path, start, and end points. The rendering is done using `matplotlib`'s 3D plotting capabilities.
 
 ### Reset Method
 
@@ -70,15 +68,15 @@ The `reset` method initializes the environment, placing the agent at the start p
 
 The `step` method processes an action, updating the agent's position and checking for episode termination conditions. It returns the new observation, reward, and episode status.
 
-### Sensor Functionality
-
-The `sensor` method allows the agent to detect obstacles in its immediate vicinity. It checks all neighboring cells for obstacles and updates the list of detected obstacles.
-
 ### Rendering Methods
 
 - `_render_frame`: Prepares the 3D plot, including the start and end points, and the agent's path.
-- `update_frame`: Updates the plot during the animation, including the agent's position, obstacles, and distance to the end point.
-- `animation_frame`: Sets up and runs the animation of the agent's movement.
+
+## Rasults 
+
+### For obstacles free evironment
+- Agent can learn the reachs end point with the minimal steps.
+- You can examine the training process from `episode_reward.png` and the reasult of the trainig process from `lsat_transaction.png`
 
 ## Usage
 
@@ -107,9 +105,6 @@ The `sensor` method allows the agent to detect obstacles in its immediate vicini
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-## Warning !
-
-If you try to run env_render_test.py file it can be render diffent test for first time. If you quite the rendering with press "q" it will re-render according to current test variables.
 
 ## Contributing
 
