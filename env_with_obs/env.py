@@ -91,7 +91,8 @@ class Env(gym.Env):
         temp_pos = tuple(self._agent + dir)
         
         if temp_pos in self.observation_space:
-            self._agent = np.array(temp_pos)
+            if temp_pos not in self.obstacles:
+                self._agent = np.array(temp_pos)
         
         self._t_step += 1
         self.transactions.append(tuple(self._agent))
@@ -113,16 +114,17 @@ class Env(gym.Env):
             reward -= 1
             
             # Distance-based reward to encourage getting closer to the goal
-            distance_to_goal = np.linalg.norm(self._agent - self._target)
+            distance_to_goal = np.linalg.norm(self._agent - self._target)*0.5
             reward -= round(distance_to_goal, 2)  # Adjust the scaling factor as needed
             
             # Penalize revisiting states to prevent loops
             if tuple(self._agent) in self.transactions:
-                reward -= 10  # Adjust penalty as needed
+                reward -= 5  # Adjust penalty as needed
             
             # Penalize collision with obstacles
-            if tuple(self._agent) in self.obstacles:
-                reward -= 50  # Large penalty for colliding with an obstacle
+            # if tuple(self._agent) in self.obstacles:
+              #   reward -= 50  # Large penalty for colliding with an obstacle
+
         self.total_reward += reward
         return reward
     

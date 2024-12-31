@@ -9,14 +9,18 @@ import datetime
 class QNetwork(nn.Module):
     def __init__(self, state_size, action_size):
         super(QNetwork, self).__init__()
-        self.fc1 = nn.Linear(state_size, 64)
-        self.fc2 = nn.Linear(64, 64)
-        self.fc3 = nn.Linear(64, action_size)
+        self.fc1 = nn.Linear(state_size, 32)
+        self.fc2 = nn.Linear(32, 64)
+        self.fc3 = nn.Linear(64, 128)
+        self.fc4 = nn.Linear(128, 64)
+        self.fc5 = nn.Linear(64, action_size)
 
     def forward(self, state):
         x = torch.relu(self.fc1(state))
         x = torch.relu(self.fc2(x))
-        return self.fc3(x)
+        x = torch.relu(self.fc3(x))
+        x = torch.relu(self.fc4(x))
+        return torch.softmax(self.fc5(x), 1)
     
 class DQNAgent:
     def __init__(self, state_size, action_size, seed):
@@ -44,7 +48,7 @@ class DQNAgent:
                 experiences = random.sample(self.memory, self.batch_size)
                 self.learn(experiences, self.gamma)
 
-    def act(self, state, eps=0.):
+    def act(self, state, eps):
         state = torch.from_numpy(np.array(state)).float().unsqueeze(0)
         self.qnetwork_local.eval()
         with torch.no_grad():
@@ -83,4 +87,4 @@ class DQNAgent:
     
     def save_model(self):
         file_name = str(datetime.date.today()) + "_model.pth"
-        torch.save(self.qnetwork_local.state_dict(),file_name)
+        torch.save(self.qnetwork_target.state_dict(),file_name)
