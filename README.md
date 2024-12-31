@@ -114,6 +114,4 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 For any inquiries or issues, please contact "Omer Esad Altunel" at "omeresadaltunel@gmail.com".
 
----
 
-This README provides an overview of the environment, instructions for installation and usage, and details about the environment's features and methods. Make sure to customize the repository URL, your name, and contact details in the appropriate sections.
